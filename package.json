@@ -1,0 +1,19 @@
+{
+  "name": "sweb",
+  "version": "1.0.0",
+  "description": "build your website without code",
+  "main": "main.js",
+  "scripts": {
+    "test": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SimonLoir/SWeb.git"
+  },
+  "author": "Simon Loir",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SimonLoir/SWeb/issues"
+  },
+  "homepage": "https://github.com/SimonLoir/SWeb#readme"
+}
