@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/SimonLoir/SWeb/issues"
   },
-  "homepage": "https://github.com/SimonLoir/SWeb#readme"
+  "homepage": "https://github.com/SimonLoir/SWeb#readme",
+  "dependencies": {
+    "electron": "^1.8.1",
+    "electron-packager": "^9.1.0",
+    "node-pty": "^0.7.2",
+    "xterm": "^2.9.2"
+  }
 }

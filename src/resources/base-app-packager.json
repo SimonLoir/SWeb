@@ -1,0 +1,14 @@
+{
+  "name": "app-name",
+  "version": "1.0.0",
+  "description": "My app made with electron",
+  "main": "main.js",
+  "scripts": {
+    "test": "electron ."
+  },
+  "author": "Simon Loir",
+  "license": "MIT",
+  "dependencies": {
+    "electron": "^1.8.1"
+  }
+}

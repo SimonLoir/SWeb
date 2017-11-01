@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -6,49 +5,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Smath</title>
+    <title>SWeb [unregistered version]</title>
     <link rel="stylesheet" href="../style/style.css">
+    <script src="../js/extjs.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/events.js"></script>
+    <script src="../js/editor.js"></script>
+    <script src="../js/view.js"></script>
+    <link rel="stylesheet" href="../../node_modules/xterm/dist/xterm.css" />
+    <script src="../../node_modules/xterm/dist/xterm.js"></script>
+    <script src="../../node_modules/xterm/dist/addons/fit/fit.js"></script>
+    <style>
+        .terminal {
+            font-family: "source-code-pro", courier-new, courier, monospace;
+        }
+
+        .terminal .xterm-viewport {
+            background: rgb(34, 34, 34);
+        }
+    </style>
 </head>
 
 <body>
     <div class="wrapper">
-        <div class="header">
-              SWeb
+        <div class="header start">
+            SWeb [unregistered version] - <span id="dir"></span>
         </div>
 
         <div class="left-tool-bar">
             <button class="" id="new_layer">+</button>
         </div>
         <div class="draw-area">
-            test
+            
         </div>
         <div class="right-tool-bar">
-            <div class="container">
-                <div class="options">
-                    <span class="layer">Couleur</span>
-                </div>
-                <div class="color-view">
-                    <input type="color" class="color-picker">
-                </div>
-            </div>
-
-            <div class="container">
-                <div class="options">
-                    <span class="layer">Style</span>
-                </div>
-                <div class="view">
-                    <table>
-                        <tr>
-                            <th>Propriété</th>
-                            <th>Valeur</th>
-                        </tr>
-                        
-                    </table>
-                </div>
-            </div>
-            <br /><br /> Copyright &copy; 2017 Simon Loir <br /><br />
+            <h2>Tools</h2>
+            
+            <h2>Components</h2>
+            <br />
+            <br /> Copyright &copy; 2017 Simon Loir
+            <br />
+            <br />
         </div>
 
+    </div>
+    <div class="startscreen">
+        <h1>SWeb</h1>
+        <div class="grid">
+            <div class="open">
+                <h2>Ouvrir un projet</h2>
+                Ouvrez un projet dans SWeb. Si vous avez modifié le code source généré par SWeb, il se pourrait que SWeb ne puisse pas l'ouvrir.
+                <div class="start-option base">Ouvrir depuis l'explorateur de fichiers</div>
+                <div class="start-option base">Ouvrir depuis un dépôt git</div>
+            </div>
+            <div class="create">
+                <h2>Créer un projet</h2>
+                Créez un projet dans SWeb. Un projet édité dans SWeb peut être modifié avec un éditeur de code mais un projet modiifé peut ne plus être utilisable par SWeb.
+                <div class="start-option base" id="create_empty_project">Créer un projet vide</div>
+                <div class="start-option base">Créer un projet avec une base scms</div>
+                <div class="start-option base">Créer un projet avec une base material design</div>
+            </div>
+        </div>
+        <div style="text-align:center;padding:65px;">
+            &copy; Copyright 2017 Simon Loir - under MIT license
+        </div>
     </div>
 </body>
 

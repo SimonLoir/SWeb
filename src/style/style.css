@@ -26,7 +26,12 @@ body,html {
     left: 0;
     right: 0;
     line-height: 30px;
-    padding-left: 3px
+    padding-left: 13px;
+    -webkit-app-region:drag;
+}
+
+.header.start{
+    background:rgb(24,24,24);
 }
 
 .header img {
@@ -266,11 +271,79 @@ td input{
 
 .draw-area {
     position: absolute;
-    top: 43px;
-    right: 270px;
-    left: 43px;
-    bottom: 2px;
+    top: 68px;
+    right: 295px;
+    left: 68px;
+    bottom: 25px;
     background: white;
     color:black;
     overflow: auto
+}
+
+.startscreen{
+    position: fixed;
+    top: 40px;left: 0;right: 0;bottom: 0;
+    background: rgb(24,24,24);
+    padding: 25px;
+}
+.grid{
+    display: grid;
+}
+.open{
+    grid-column: 1;
+    padding-right: 7px;
+}
+
+.create{
+    grid-column: 2;
+    padding-left: 7px;
+}
+
+::-webkit-scrollbar {
+    -webkit-app-region: no-drag;
+    width: 12px;
+    background: transparent
+}
+
+::-webkit-scrollbar-track {
+    -webkit-app-region: no-drag;
+    background: none;
+    background: transparent
+}
+
+::-webkit-scrollbar-thumb {
+    -webkit-app-region: no-drag;
+    background: rgba(255, 255, 255, 0.05);
+    transition: 0.75s;
+    cursor: pointer
+}
+
+::-webkit-scrollbar-thumb:hover {
+    -webkit-app-region: no-drag;
+    background: rgba(255, 255, 255, 0.5)
+}
+
+textarea {
+    resize: none
+}
+
+::selection {
+    background: blue;
+    color: white
+}
+
+.startscreen h2{
+    color:coral;
+}
+.start-option.base{
+    color:coral;
+}
+.start-option{
+    padding: 15px;
+    margin-left: -15px;
+    cursor: pointer;
+    transition: 0.35s;   
+}
+.start-option:hover{
+    background: rgb(35,35,35);
 }
