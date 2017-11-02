@@ -35,13 +35,18 @@
         <div class="left-tool-bar">
             <button class="" id="new_layer">+</button>
         </div>
-        <div class="draw-area">
-            
+        <div class="draw-area"  ondrop="drop(event)" ondragover="allowDrop(event)">
         </div>
         <div class="right-tool-bar">
             <h2>Tools</h2>
-            
+                <button onclick="main.buildToFolder()">Build</button>
             <h2>Components</h2>
+            <div>
+                <div draggable="true" ondragstart="drag(event)" class="component">button</div>
+                <div draggable="true" ondragstart="drag(event)" class="component">span</div>
+                <div draggable="true" ondragstart="drag(event)" class="component">div</div>
+                <div draggable="true" ondragstart="drag(event)" class="component">input</div>
+            </div>
             <br />
             <br /> Copyright &copy; 2017 Simon Loir
             <br />
@@ -62,14 +67,28 @@
                 <h2>Créer un projet</h2>
                 Créez un projet dans SWeb. Un projet édité dans SWeb peut être modifié avec un éditeur de code mais un projet modiifé peut ne plus être utilisable par SWeb.
                 <div class="start-option base" id="create_empty_project">Créer un projet vide</div>
-                <div class="start-option base">Créer un projet avec une base scms</div>
-                <div class="start-option base">Créer un projet avec une base material design</div>
             </div>
         </div>
         <div style="text-align:center;padding:65px;">
             &copy; Copyright 2017 Simon Loir - under MIT license
         </div>
     </div>
+    <script>
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function drag(ev) {
+            ev.dataTransfer.setData("text", ev.target.innerHTML);
+        }
+
+        function drop(ev) {
+            ev.preventDefault();
+            var data = ev.dataTransfer.getData("text");
+            console.log(ev)
+            view.createElement(data, ev.layerX, ev.layerY, ev.toElement);
+        }
+    </script>
 </body>
 
 </html>

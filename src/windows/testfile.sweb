@@ -1,0 +1,12 @@
+def test = div
+    color=red
+    background=transparent
+
+def test>button1 = button
+    color=red
+
+def app2 = span
+
+def app2>title = b
+
+def app2>title>font = i

@@ -4,11 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{--app-name--}</title>
+    <title>{ @@ app name @@ }</title>
     <link rel="stylesheet" href="style.css">
     <script src="app.js"></script>
 </head>
 <body>
-    
+    <div id="app">
+          
+          { @@ body @@ }
+           
+    </div>
+    <style>
+        #app{
+            position:fixed;
+            top:0;
+            left:0;
+            right:0;
+            bottom:0;
+            overflow:auto;
+            height:100%;
+            width:100%;
+        }
+    </style>
 </body>
 </html>

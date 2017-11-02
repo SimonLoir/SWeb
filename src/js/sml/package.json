@@ -1,0 +1,11 @@
+{
+  "name": "s-markup-language",
+  "version": "1.0.0",
+  "description": "A markup language that helps you to  build an application with sweb",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Simon Loir",
+  "license": "MIT"
+}
