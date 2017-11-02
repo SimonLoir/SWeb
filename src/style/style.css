@@ -280,6 +280,14 @@ td input{
     overflow: auto;
 }
 
+.always-visible{
+    border:1px solid gray;
+}
+
+.draw-area div:hover, .draw-area button:hover, .draw-area input:hover{
+    border:3px solid red;
+}
+
 .startscreen{
     position: fixed;
     top: 40px;left: 0;right: 0;bottom: 0;

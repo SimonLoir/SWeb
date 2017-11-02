@@ -29,6 +29,11 @@ function main(){
         
         writeFile(folder[0] + "/builds/src/index.html", fs.readFileSync(__dirname + "/../resources/base-app.html", "utf-8").replace("{ @@ body @@ }", html));
         
+        this.buildProject();
+    }
+    
+    this.buildProject = function () {
+        writeFile(folder[0] + "/project/index.sml", sml.export($(".draw-area").get(0), true), "utf-8")
     }
     
     return this;

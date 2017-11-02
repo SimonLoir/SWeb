@@ -9,4 +9,15 @@ $(document).ready(() =>{
             view.setDirectory(f[0]);
         });
     });
+    $('#open_from_explorer').click(() => {
+        dialog.showOpenDialog({properties: ['openDirectory'], title:"Ouvrir un dossier"}, function (f) {
+            if(f== undefined){
+                return;
+            }
+            view.hideStartScreen();
+            sml.parseAndBuild(fs.readFileSync(f[0] + "/project/index.sml", "utf-8"), $(".draw-area"));
+            
+            view.setDirectory(f[0]);
+        });
+    });
 });

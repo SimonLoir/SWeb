@@ -27,7 +27,7 @@ function view_object() {
         if(data == "div"){
             e.css("width", "200px");
             e.css("height", "200px");
-            e.css("border", "1px solid gray");
+            e.addClass("always-visible")
             e.get(0).ondragover= allowDrop;
         }
         
