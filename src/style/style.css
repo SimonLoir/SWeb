@@ -133,6 +133,16 @@ body,html {
     transition: 0.75s
 }
 
+.right-tool-bar button{
+    background:rgba(255,255,255, 0.05);
+    color:white;
+    border: none;
+    transition: 0.25s;
+    cursor: pointer;
+    border-radius: 3px;
+    padding:5px;
+    margin:5px;
+}
 
 .right-tool-bar.force-show {
     transform: translateX(0px)
@@ -302,11 +312,11 @@ td input{
 }
 
 .always-visible{
-    border:1px solid gray;
+    border:1px dashed gray;
 }
 
 .draw-area div:hover, .draw-area button:hover, .draw-area input:hover{
-    border:3px solid red;
+    border:2px dashed red;
 }
 
 .startscreen{

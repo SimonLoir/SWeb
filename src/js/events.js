@@ -16,6 +16,14 @@ $(document).ready(() =>{
             }
             view.hideStartScreen();
             sml.parseAndBuild(fs.readFileSync(f[0] + "/project/index.sml", "utf-8"), $(".draw-area"));
+            var project_text = JSON.parse(fs.readFileSync(f[0] + "/project/content.sml-content", "utf-8"));
+            let i;
+            for(i = 0; i < Object.keys(project_text).length; i++){
+                
+                var key =  Object.keys(project_text)[i]
+                $("#" + key).html(project_text[key]);
+                
+            }
             
             view.setDirectory(f[0]);
         });
@@ -25,4 +33,10 @@ $(document).ready(() =>{
          var window = app.getCurrentWindow();
          window.close();
     });
+    
+    $("#filter").get(0).oninput = function () {
+        
+        main.updateProps(global_el[0], global_el[1], this.value)
+        
+    }
 });

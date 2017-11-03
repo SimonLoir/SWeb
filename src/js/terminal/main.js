@@ -46,7 +46,7 @@ exports.newTerminal = function (error_callback){
     x_term_resizer.css('top', "0px");
     x_term_resizer.css('left', "0");
     x_term_resizer.css('right', "0");
-    x_term_resizer.css('background', "#ccc");
+    x_term_resizer.css('background', "rgb(30,30,30)");
     x_term_resizer.css('height', "4px");
     x_term_resizer.css('cursor', "n-resize");
 
@@ -66,9 +66,9 @@ exports.newTerminal = function (error_callback){
     });
 
     ptyProcess.on('data', function (data) {
-        term.write(data)
+        term.write(data);
         if(data.indexOf("0;31") >= 0){
-            
+            x_term.css("display", "block")
             if(error_callback != undefined){
                 error_callback();
             }else if(data.indexOf("ERR!")){

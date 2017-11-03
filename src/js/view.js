@@ -39,13 +39,21 @@ function view_object() {
 
         e.get(0).id = data + elements[data];
 
-        addEditorFeatures(e.get(0))
+        if (data == "span") {
+            e.html('Some text here');
+        } else if (data == "button") {
+            e.html('Click me');
+        }
+        
+        console.log($("#filter").get(0).value)
+        
+        addEditorFeatures(e.get(0), false)
     }
 
     return this;
 }
 
-function addEditorFeatures(e) {
+function addEditorFeatures(e, remove) {
     draggable(e);
     e.ondblclick = function(e) {
         if (e.toElement != this) {
@@ -55,11 +63,26 @@ function addEditorFeatures(e) {
     }
 
     e.onclick = function(e) {
+        
         if (e.toElement != this) {
             return;
         }
-        main.updateProps(this);
+        console.log(remove)
+        if (remove != true) {
+            console.log(this.nodeName)
+            if (this.nodeName == "BUTTON" || this.nodeName == "SPAN") {
+                var text = true;
+            } else {
+                var text = false;
+            }
+        }else{
+            text = false;
+        }
+        
+        main.updateProps(this, text, $("#filter").get(0).value);
     }
+
+    
     return e;
 }
 
@@ -88,4 +111,5 @@ function draggable(el) {
     document.addEventListener("mouseup", function(e) {
         inDrag = false;
     });
+
 }
