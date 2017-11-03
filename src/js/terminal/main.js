@@ -1,4 +1,4 @@
-exports.newTerminal = function (){
+exports.newTerminal = function (error_callback){
     terminal_last_id ++;
     var x_term = $(document.body).child("div");
     x_term.css('z-index', 100);
@@ -22,6 +22,7 @@ exports.newTerminal = function (){
     var x_term_resizer = x_term.child("div");
 
     var m_pos;
+    
     function resize(e) {
         var parent = resize_el.parentNode;
         var dx = m_pos - e.y;
@@ -31,10 +32,12 @@ exports.newTerminal = function (){
     }
 
     var resize_el = x_term_resizer.get(0);
+    
     resize_el.addEventListener("mousedown", function (e) {
         m_pos = e.y;
         document.addEventListener("mousemove", resize, false);
     }, false);
+    
     document.addEventListener("mouseup", function () {
         document.removeEventListener("mousemove", resize, false);
     }, false);
@@ -51,6 +54,7 @@ exports.newTerminal = function (){
     term.open(x_term.get(0));
     term.cursorBlink = true
     term.fit()
+    
     var pty = require('node-pty');
 
     var shell = os.platform() === 'win32' ? 'powershell.exe' : 'bash';
@@ -63,10 +67,23 @@ exports.newTerminal = function (){
 
     ptyProcess.on('data', function (data) {
         term.write(data)
+        if(data.indexOf("0;31") >= 0){
+            
+            if(error_callback != undefined){
+                error_callback();
+            }else if(data.indexOf("ERR!")){
+                alert("Une erreur est survenue avec npm. Vous pouvez essayer de réinstaller electron. Essayez de réinstaller nodejs.");
+            }
+        }
     });
-
+    
+    
     ptyProcess.on('close', function (data) {
         x_term.remove();
+    });
+    
+    ptyProcess.on('message', function (data) {
+        console.log(data)
     });
 
     ptyProcess.on('exit', function (data) {

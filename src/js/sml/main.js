@@ -150,7 +150,7 @@ exports.init = function() {
                 elements[line[1]] += 1;
             }
             
-            e.child(line[1]).addClass("always-visible").get(0).id = line[0].split(" ")[line[0].split(" ").length - 1];
+            addEditorFeatures(e.child(line[1]).addClass("always-visible").get(0)).id = line[0].split(" ")[line[0].split(" ").length - 1];
     
             
         }
@@ -232,6 +232,7 @@ exports.init = function() {
 
         return sml_style;
     }
+    
 
     return this;
 }

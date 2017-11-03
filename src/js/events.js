@@ -20,4 +20,9 @@ $(document).ready(() =>{
             view.setDirectory(f[0]);
         });
     });
+    
+    $(".cross-quit").click(() => {
+         var window = app.getCurrentWindow();
+         window.close();
+    });
 });

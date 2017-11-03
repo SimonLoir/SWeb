@@ -30,6 +30,7 @@
     <div class="wrapper">
         <div class="header start">
             SWeb [unregistered version] - <span id="dir"></span>
+            <span class="cross-quit">×</span>
         </div>
 
         <div class="left-tool-bar">
@@ -39,7 +40,10 @@
         </div>
         <div class="right-tool-bar">
             <h2>Tools</h2>
-                <button onclick="main.buildToFolder()">Build</button>
+                <button onclick="main.buildToFolder()">Sauvergader</button>
+                <button onclick="main.run('npm test', main.runError)">Lancer l'app</button>
+                <button onclick="main.run('npm remove electron; npm install electron --save; npm update', main.installError)">(Ré)installer electron.</button><br />
+                <div class="props"></div>
             <h2>Components</h2>
             <div>
                 <div draggable="true" ondragstart="drag(event)" class="component">button</div>

@@ -1,7 +1,7 @@
 var view = new view_object();
 
 var elements = {
-    
+
 }
 
 function view_object() {
@@ -24,38 +24,43 @@ function view_object() {
         e.css("position", "absolute");
         e.css("top", y + "px");
         e.css("left", x + "px");
-        if(data == "div"){
+        if (data == "div") {
             e.css("width", "200px");
             e.css("height", "200px");
             e.addClass("always-visible")
-            e.get(0).ondragover= allowDrop;
+            e.get(0).ondragover = allowDrop;
         }
-        
-        if(elements[data] == undefined){
+
+        if (elements[data] == undefined) {
             elements[data] = 0;
-        }else{
+        } else {
             elements[data] = elements[data] + 1;
         }
-        
+
         e.get(0).id = data + elements[data];
-        
-        draggable(e.get(0));
-        e.get(0).ondblclick = function (e) {
-            if(e.toElement != this){
-                return;
-            }
-            main.loadEditor(this);
-        }
-        
-        e.get(0).onclick = function (e) {
-            if(e.toElement != this){
-                return;
-            }
-            main.updateProps(this);
-        }
+
+        addEditorFeatures(e.get(0))
     }
 
     return this;
+}
+
+function addEditorFeatures(e) {
+    draggable(e);
+    e.ondblclick = function(e) {
+        if (e.toElement != this) {
+            return;
+        }
+        main.loadEditor(this);
+    }
+
+    e.onclick = function(e) {
+        if (e.toElement != this) {
+            return;
+        }
+        main.updateProps(this);
+    }
+    return e;
 }
 
 function draggable(el) {
@@ -64,7 +69,7 @@ function draggable(el) {
     var inDrag = false;
     var dragTarget = el;
     dragTarget.addEventListener("mousedown", function(e) {
-        if(e.toElement != dragTarget){
+        if (e.toElement != dragTarget) {
             return false;
         }
         inDrag = true;
