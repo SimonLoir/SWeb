@@ -1,6 +1,15 @@
-file -> .sweb
-content -> 
+.sml file -> index.sml in the project directory
+    
+    This file must be compiled into html code. Its a way better way to say sweb what to do and how. SML isn't content based , it's based on the style of the element and it's id.
+    Indeed, in sweb, names are the IDs of the elements. Each element has an ID, even an element that doesn't have an event listener. 
+    Each element can be modified in sweb. [known bug]if the user sets an value to drag for webkitAppRegion, the user will not be able to modify the element again. [end bug]
+    A SML file can be very heavy : SWeb save everything, even if the property a devlopped property (ie : border -> border-left-color) 
+    
+    
+.sml-content file -> content.sml-content in the project directory
 
-settings:
-
-files:
+    This file is a json file that is used for the following elements :
+        span
+        button
+    Its a json document that will be converted in javascript. Indeed, the content of the element isn't generated with the HTML. Althought the js file that is generated is included inside the app element in the app.
+    

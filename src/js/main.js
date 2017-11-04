@@ -122,7 +122,15 @@ function main() {
         console.log("e:saved")
         writeFile(folder[0] + "/project/index.sml", sml.export($(".draw-area").get(0), true), "utf-8")
     }
-
+    
+    this.loadEditor = function (el) {
+        
+        if(el.nodeName == "BUTTON"){
+            alert("Button")
+        }
+        
+    }
+    
     return this;
 }
 
