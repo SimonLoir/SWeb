@@ -12,6 +12,27 @@ function view_object() {
         $('.start').removeClass('start');
 
     }
+    
+    this.createEditor = function (id) {
+        
+        let file = folder[0] + "/project/events/" + id + ".js";
+        
+        if(fs.existsSync(file)){
+            
+            //open the editor
+            
+        }else{
+            let base_code = "";
+            
+            if(id.indexOf("button") == 0){
+                base_code = id + ".onclick = function (event) {\n\n}";
+            }
+            
+            writeFile(file, "/* This is the js file of the element that has this is : " + id + ". To be efficient, please only use this file for that specific element. */\n\n" + base_code)
+            
+        }
+        
+    }
 
     this.setDirectory = function(dir) {
         project_dir = dir;

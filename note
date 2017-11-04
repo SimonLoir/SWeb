@@ -11,5 +11,5 @@
     This file is a json file that is used for the following elements :
         span
         button
-    Its a json document that will be converted in javascript. Indeed, the content of the element isn't generated with the HTML. Althought the js file that is generated is included inside the app element in the app.
+    It's a json document that will be converted in javascript. Indeed, the content of the element isn't generated with the HTML. Althought the js file that is generated is included inside the app element in the app.
     

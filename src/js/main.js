@@ -16,11 +16,11 @@ var global_el;
 function main() {
 
     this.createProject = function(dir) {
-        console.log(dir)
         mkdir(dir + "/releases");
         mkdir(dir + "/builds");
         mkdir(dir + "/builds/src");
         mkdir(dir + "/project");
+        mkdir(dir + "/project/events");
         writeFile(dir + "/project/index.sml", "\n", "utf8")
         writeFile(dir + "/project/content.sml-content", "{}", "utf8")
         writeFile(dir + "/builds/main.js", fs.readFileSync(__dirname + "/../resources/base-app.js", "utf-8"));
@@ -126,7 +126,9 @@ function main() {
     this.loadEditor = function (el) {
         
         if(el.nodeName == "BUTTON"){
-            alert("Button")
+            
+            view.createEditor(el.id);
+            
         }
         
     }
