@@ -89,7 +89,7 @@ exports.init = function() {
 
                 if (rule[1].trim() != "" && rule[1].trim() != "undefined") {
 
-                    style += rule[0].trim() + ":" + rule[1].trim().replace(";", "") + ";";
+                    style += rule[0].trim().replace(/[A-Z]/g, function (x){return "-" + x.toLowerCase()}) + ":" + rule[1].trim().replace(";", "") + ";";
 
                 }
 
@@ -266,6 +266,23 @@ exports.init = function() {
         }
 
         return sml_style;
+    }
+    
+    this.buildJS = function (dir_array, base) {
+        
+        var html = '<script>';
+        
+        let i = 0;
+        
+        for(i = 0; i < dir_array.length; i++){
+            
+            html += fs.readFileSync(base + dir_array[i], "utf-8");
+            
+        }
+        
+        html += '</script>';
+        return html;
+        
     }
 
 

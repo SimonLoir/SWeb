@@ -316,7 +316,7 @@ td input{
 }
 
 .draw-area div:hover, .draw-area button:hover, .draw-area input:hover{
-    border:2px dashed red;
+    border:1px solid red;
 }
 
 .startscreen{

@@ -111,6 +111,7 @@ exports.addFunc = function(ce, cec, file, line_n) {
         }
 
     }
+
     ce.oninput = function(event) {
 
         if (file.extension == "md") {

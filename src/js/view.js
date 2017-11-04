@@ -28,6 +28,11 @@ function view_object() {
             
             if(id.indexOf("button") == 0){
                 base_code = id + ".onclick = function (event) {\n\n}";
+            }else if(id.indexOf("input") == 0){
+                base_code = id + ".oninput = function (event) {\n\n}\n";
+                base_code += id + ".onkeypress = function (event) {\n\n}\n";
+                base_code += id + ".onkeyup = function (event) {\n\n}\n";
+                base_code += id + ".onkeydown = function (event) {\n\n}\n";
             }
             
             main.buildProject();

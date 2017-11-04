@@ -49,7 +49,7 @@ function main() {
 
         let html = "<style>" + parsed[0] + "</style>" + parsed[1];
 
-        writeFile(folder[0] + "/builds/src/index.html", fs.readFileSync(__dirname + "/../resources/base-app.html", "utf-8").replace("{ @@ body @@ }", html + sml.addText()));
+        writeFile(folder[0] + "/builds/src/index.html", fs.readFileSync(__dirname + "/../resources/base-app.html", "utf-8").replace("{ @@ body @@ }", html + sml.addText() + sml.buildJS(fs.readdirSync(folder[0] + "/project/events/"), folder[0] + "/project/events/")));
 
     }
 
@@ -141,11 +141,7 @@ function main() {
 
     this.loadEditor = function(el) {
 
-        if (el.nodeName == "BUTTON") {
-
-            view.createEditor(el.id);
-
-        }
+        view.createEditor(el.id);
 
     }
 
