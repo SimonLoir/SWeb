@@ -20,6 +20,8 @@ function view_object() {
         if(fs.existsSync(file)){
             
             //open the editor
+            tabmanager.newTab(file);
+            
             
         }else{
             let base_code = "";
@@ -28,8 +30,11 @@ function view_object() {
                 base_code = id + ".onclick = function (event) {\n\n}";
             }
             
-            writeFile(file, "/* This is the js file of the element that has this is : " + id + ". To be efficient, please only use this file for that specific element. */\n\n" + base_code)
+            main.buildProject();
             
+            writeFile(file, "/* This is the js file of the element that has this id : " + id + ". To be organised, please only use this file for that specific element. (Press ESC to exit the editor)*/\n\n" + base_code)
+            
+            tabmanager.newTab(file);
         }
         
     }

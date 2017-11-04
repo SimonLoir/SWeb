@@ -394,3 +394,84 @@ textarea {
 .start-option:hover{
     background: rgb(35,35,35);
 }
+
+
+
+
+.xtab{
+    
+    position: fixed;
+    top: 25px; right: 25px; left: 25px; bottom: 25px;
+    height: calc(100% - 50px); width: calc(100% - 50px);
+    box-shadow:0px 0px 40px rgba(0,0,0,0.85);
+}
+
+.default_color{
+    color:white;
+}
+
+*:focus {outline:none !important}
+
+.line-numbers {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    padding-right: 5px;
+    padding-left: 0;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    font-family: source-code-pro, sans-serif;
+    color: rgba(255, 255, 255, 0.25);
+    overflow: hidden;
+    font-size: 20px;
+    margin: 0;
+    width: 40px;
+    height: calc(100% - 50px);
+    border: none;
+    white-space: nowrap;
+    background: #202020;
+    text-align: right
+}
+
+.code-editor {
+    caret-color: auto;
+    background: transparent;
+    position: absolute;
+    top: 0;
+    left: 45px;
+    right: 0;
+    bottom: 0;
+    padding: 25px;
+    font-family: source-code-pro, sans-serif;
+    color: rgba(255, 255, 255, 0.25);
+    overflow: auto;
+    font-size: 20px;
+    margin: 0;
+    width: calc(100% - 95px);
+    height: calc(100% - 50px);
+    border: none;
+    white-space: nowrap
+}
+
+.code-editor-colors {
+    font-size: 20px;
+    position: absolute;
+    top: 0;
+    left: 45px;
+    right: 0;
+    bottom: 0;
+    padding: 25px;
+    font-family: source-code-pro, sans-serif;
+    background: #1e1e1e;
+    color: #fff;
+    overflow: auto;
+    margin: 0;
+    width: calc(100% - 95px);
+    height: calc(100% - 50px);
+    border: none;
+    white-space: nowrap;
+    overflow: hidden
+}
+
+
