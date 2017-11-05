@@ -27,7 +27,8 @@ function main() {
             mkdir(dir + "/builds/src");
             mkdir(dir + "/project");
             mkdir(dir + "/project/events");
-
+            
+            writeFile(dir + "/project/events/app.ready.js", '/* When the app is ready */ \ndocument.addEventListener("DOMContentLoaded", function () {\n\t/* Some code here */\n\tconsole.log("app is loaded")\n});');
             writeFile(dir + "/project/index.sml", "\n", "utf8")
             writeFile(dir + "/project/content.sml-content", "{}", "utf8")
             writeFile(dir + "/builds/main.js", fs.readFileSync(__dirname + "/../resources/base-app.js", "utf-8"));
@@ -119,7 +120,7 @@ function main() {
         alert("Une erreur est survenue lors de l'installation d'electron.")
     }
 
-    this.run = function(command, error) {
+    this.run = function(command, error, packager) {
         this.buildToFolder()
         let old = folder[0] + "";
         folder[0] = old + "/builds";

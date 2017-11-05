@@ -1,3 +1,7 @@
+@font-face {
+    font-family: source-code-pro;
+    src: url(../SourceCodePro-Regular.ttf)
+}
 body,html {
     background: #222;
     color: white;

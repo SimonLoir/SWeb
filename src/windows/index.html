@@ -42,7 +42,8 @@
             <h2>Tools</h2>
                 <button onclick="main.buildToFolder()">Sauvergader</button>
                 <button onclick="main.run('npm test', main.runError)">Lancer l'app</button>
-                <button onclick="main.run('npm remove electron; npm install electron --save; npm update', main.installError)">(Ré)installer electron.</button><br />
+                <button onclick="main.run('npm remove electron; npm install electron --save;npm install electron-packager -g --save; npm update', main.installError)">(Ré)installer electron.</button><br />
+                <button onclick="tabmanager.newTab(folder[0] + '/project/events/app.ready.js')">App loaded script</button>
                 <br /> <input type="text" id="filter" style="background:rgba(255,255,255,0.035);width:calc(100% - 10px);border-radius:3px;border:none;padding:5px;color:white;margin-bottom:5px;"><br />
                 <div class="props"></div>
             <h2>Components</h2>
