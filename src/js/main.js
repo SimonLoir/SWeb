@@ -178,6 +178,22 @@ String.prototype.insertAt = function (index, string) {
     return this.substr(0, index) + string + this.substr(index);
 }
 
+String.prototype.find = function(regex, startpos) {
+    var indexOf = this.substring(startpos || 0).search(regex);
+    var value = regex.exec(this.substring(startpos || 0));
+    
+    try {
+        return [(indexOf >= 0) ? (indexOf + (startpos || 0)) : indexOf, value[0], value[0].length];
+    } catch (error) {
+        return false;
+    }
+}
+
+String.prototype.findStr = function(regex, startpos) {
+    return this.find(new RegExp(regex, "i"), startpos);
+}
+
+
 /**
  * Inserts text at the position of the cursor
  * @param {String} text 

@@ -2,7 +2,7 @@
  * Creates a new tab in the tab manager
  * @param {String} filename the filename
  */
-exports.newTab = function(filename, full_md) {
+exports.newTab = function (filename, full_md) {
     var x_filename = filename.replace(/\\/g, "/");
     var x_settings = os.homedir().replace(/\\/g, "/") + "/.scode/settings.json";
     var fs = require('fs');
@@ -29,6 +29,9 @@ exports.newTab = function(filename, full_md) {
 
         var code_editor_colors = tab.child('div').addClass("code-editor-colors");
 
+        var code_editor_search = tab.child('div').addClass("code-editor-search");
+        code_editor_search.get(0).value = data;
+
         var code_editor = tab.child('textarea').addClass("code-editor");
         code_editor.get(0).value = data;
         code_editor.get(0).setAttribute('contenteditable', "true");
@@ -48,11 +51,12 @@ exports.newTab = function(filename, full_md) {
         tabmanager.addFunc(code_editor.get(0), code_editor_colors.get(0), {
             extension: frn_split[frn_split.length - 1],
             filename: filename
-        }, line_numbers);
+        }, line_numbers, code_editor_search);
 
-        code_editor.get(0).onscroll = function() {
+        code_editor.get(0).onscroll = function () {
             if (code_editor_colors.get(0).scrollHeight >= this.scrollTop) {
                 code_editor_colors.get(0).scrollTop = this.scrollTop;
+                code_editor_search.get(0).scrollTop = this.scrollTop;
                 line_numbers.get(0).scrollTop = this.scrollTop;
             } else {
                 this.scrollTop = code_editor_colors.get(0).scrollTop;
@@ -61,6 +65,7 @@ exports.newTab = function(filename, full_md) {
 
             if (code_editor_colors.get(0).scrollWidth >= this.scrollLeft) {
                 code_editor_colors.get(0).scrollLeft = this.scrollLeft;
+                code_editor_search.get(0).scrollLeft = this.scrollLeft;
             } else {
                 this.scrollLeft = code_editor_colors.get(0).scrollLeft;
                 return false;
@@ -81,9 +86,9 @@ exports.newTab = function(filename, full_md) {
     });
 }
 
-exports.addFunc = function(ce, cec, file, line_n) {
+exports.addFunc = function (ce, cec, file, line_n, code_editor_search) {
     var last = 0;
-    ce.onkeyup = function(event) {
+    ce.onkeyup = function (event) {
         if (event != undefined && event.keyCode == 13) {
 
             var text = this.value.insertAt(getCaretPos(this), "::scode~cursor-element");
@@ -112,7 +117,7 @@ exports.addFunc = function(ce, cec, file, line_n) {
 
     }
 
-    ce.oninput = function(event) {
+    ce.oninput = function (event) {
 
         if (file.extension == "md") {
             ce.parentElement.querySelector('.md-preview').innerHTML = marked(ce.value) + "<br /><br /><br />";
@@ -130,7 +135,7 @@ exports.addFunc = function(ce, cec, file, line_n) {
         last = number_of_lines;
     }
     //ce.onkeyup = ce.oninput;
-    ce.onkeydown = function(event) {
+    ce.onkeydown = function (event) {
         if (event.keyCode === 9) {
             var v = this.value,
                 s = this.selectionStart,
@@ -193,6 +198,51 @@ exports.addFunc = function(ce, cec, file, line_n) {
                 }
             });
 
+        } else if (event.key == "f" && event.ctrlKey) {
+            let xe = this;
+            let start_position = 0;
+            $("#" + tabs[file.filename].id + " .search_tool").remove();
+            let div = $("#" + tabs[file.filename].id).child("div")
+            div.addClass('search_tool');
+            div.html('')
+            let input = div.child("input");
+            let last = false;
+            input.get(0).onkeyup = function (e) {
+                console.log(e);
+                if (e.key == "Escape") {
+                    div.remove();
+                    code_editor_search.html("");
+                    return false;
+                }
+                if ((e == undefined && last != false) || e.key == "Enter") {
+                    var match = xe.value.findStr(this.value, last[0] + last[2]);
+
+                } else {
+                    var match = xe.value.findStr(this.value);
+                }
+                last = match;
+
+                if (match == false) {
+                    code_editor_search.html("");
+                    console.log("no-match")
+                    return false;
+                }
+
+                var color_start = '``--scode--match--search~~~~~~~scode-start``';
+                var color_end = '``--scode--match--search~~~~~~~scode-end``';
+
+                var val = xe.value.insertAt(match[0] + match[2], color_end).insertAt(match[0], color_start).replace(/\</g, "&lt;").replace(/\n/g, "<br>").replace(/\s/g, " ");
+
+                val = val.replace(color_start, '<span style="background:cornflowerblue;color:white;">');
+                val = val.replace(color_end, '</span>');
+
+                console.log(val)
+
+                code_editor_search.html(val);
+                console.log(code_editor_search)
+                ce.scrollTop = code_editor_search.get(0).querySelector('span').offsetTop - 50;
+            }
+            input.get(0).focus()
         }
 
 
@@ -200,7 +250,7 @@ exports.addFunc = function(ce, cec, file, line_n) {
     ce.oninput();
 }
 
-exports.codify = function(text, file, el, cec) {
+exports.codify = function (text, file, el, cec) {
 
     line_to_update = -1;
     text = text.insertAt(getCaretPos(el), "::scode~cursor-element");
@@ -261,7 +311,7 @@ exports.codify = function(text, file, el, cec) {
 }
 
 
-exports.codify_line = function(x___text, file, previous) {
+exports.codify_line = function (x___text, file, previous) {
     x___text = x___text.replace(/ /g, " ");
     x___text = x___text.replace('::scode~cursor-element', '');
     x___text = highlighting.chooseHighlighter(file.extension)(x___text, previous)
