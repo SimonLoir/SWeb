@@ -24,7 +24,7 @@ html {
 }
 
 .props {
-    max-height: 50vh;
+    max-height: calc(100vh - 640px);
     overflow: auto;
 }
 
@@ -396,6 +396,9 @@ textarea {
 }
 
 .component {
+    cursor: grab;
+    display: inline-block;
+    width: 44%;
     background: rgba(255, 255, 255, 0.035);
     margin-top: 5px;
     padding: 3px;
