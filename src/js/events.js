@@ -5,8 +5,9 @@ $(document).ready(() =>{
                 return;
             }
             main.createProject(f[0]);
-            view.hideStartScreen();
             view.setDirectory(f[0]);
+            $('#install-tools').click();
+            view.hideStartScreen();
         });
     });
     $('#open_from_explorer').click(() => {
@@ -14,18 +15,22 @@ $(document).ready(() =>{
             if(f== undefined){
                 return;
             }
-            view.hideStartScreen();
-            sml.parseAndBuild(fs.readFileSync(f[0] + "/project/index.sml", "utf-8"), $(".draw-area"));
-            var project_text = JSON.parse(fs.readFileSync(f[0] + "/project/content.sml-content", "utf-8"));
-            let i;
-            for(i = 0; i < Object.keys(project_text).length; i++){
+            try {
+                sml.parseAndBuild(fs.readFileSync(f[0] + "/project/index.sml", "utf-8"), $(".draw-area"));
+                var project_text = JSON.parse(fs.readFileSync(f[0] + "/project/content.sml-content", "utf-8"));
+                let i;
+                for(i = 0; i < Object.keys(project_text).length; i++){
+                    
+                    var key =  Object.keys(project_text)[i]
+                    $("#" + key).html(project_text[key]);
+                    
+                }
                 
-                var key =  Object.keys(project_text)[i]
-                $("#" + key).html(project_text[key]);
-                
+                view.setDirectory(f[0]);
+                view.hideStartScreen();
+            } catch (error) {
+                alert("Ce dossier n'est pas un projet sweb valide.");
             }
-            
-            view.setDirectory(f[0]);
         });
     });
     

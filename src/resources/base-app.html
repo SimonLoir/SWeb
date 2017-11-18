@@ -9,6 +9,12 @@
     <script src="app.js"></script>
 </head>
 <body>
+    <script>
+        TMLElement.prototype.attachTo = function (e_class) {
+            var real_class = "sweb-app-group-" + e_class;
+            this.classList.add(real_class);
+        }    
+    </script>
     <div id="app">
           
           { @@ body @@ }

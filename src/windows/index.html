@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>SWeb [unregistered version]</title>
+    <title>SWeb</title>
     <link rel="stylesheet" href="../style/style.css">
     <script src="../js/extjs.js"></script>
     <script src="../js/main.js"></script>
@@ -29,7 +29,7 @@
 <body>
     <div class="wrapper">
         <div class="header start">
-            SWeb [unregistered version] - <span id="dir"></span>
+            SWeb <span id="version-activation">[unregistered version]</span> - <span id="dir"></span>
             <span class="cross-quit">×</span>
         </div>
 
@@ -40,11 +40,13 @@
         </div>
         <div class="right-tool-bar">
             <h2>Tools</h2>
-                <button onclick="main.buildToFolder()">Sauvergader</button>
+                <button onclick="main.buildToFolder()">Sauvegarder</button>
                 <button onclick="main.run('npm test', main.runError)">Lancer l'app</button>
-                <button onclick="main.run('npm remove electron; npm install electron --save;npm install electron-packager -g --save; npm update', main.installError)">(Ré)installer electron.</button><br />
+                <button onclick="main.run('electron-packager . --all --electron-version=1.8.1 --out=../releases --icon=src/logo.ico --overwrite', main.runError)">Générer une application</button>
+                <button id="install-tools" onclick="main.run('npm remove electron; npm install electron --save;npm install electron-packager -g --save; npm update', main.installError)">(Ré)installer electron.</button><br />
                 <button onclick="tabmanager.newTab(folder[0] + '/project/events/app.ready.js')">App loaded script</button>
-                <br /> <input type="text" id="filter" style="background:rgba(255,255,255,0.035);width:calc(100% - 10px);border-radius:3px;border:none;padding:5px;color:white;margin-bottom:5px;"><br />
+                <button onclick="tabmanager.newTab(folder[0] + '/builds/package.json')">Configuration</button>
+                <br /><br /> <input type="text" id="filter" style="background:rgba(255,255,255,0.035);width:calc(100% - 10px);border-radius:3px;border:none;padding:5px;color:white;margin-bottom:5px;"><br />
                 <div class="props"></div>
             <h2>Components</h2>
             <div>

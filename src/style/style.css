@@ -147,6 +147,17 @@ html {
     border-radius: 3px;
     padding: 5px;
     margin: 5px;
+    width:calc(100% - 10px);
+    transition:0.25s;
+}
+
+.right-tool-bar button:hover{
+    box-shadow: 0px 0px 15px rgba(0,0,0,0.25);
+}
+
+.right-tool-bar button:active{
+    background: white;
+    color: rgb(41,41,41);
 }
 
 .right-tool-bar.force-show {
@@ -351,7 +362,7 @@ td input {
     padding-left: 7px;
 }
 
-/*::-webkit-scrollbar {
+::-webkit-scrollbar {
     -webkit-app-region: no-drag;
     width: 12px;
     background: transparent
@@ -365,15 +376,15 @@ td input {
 
 ::-webkit-scrollbar-thumb {
     -webkit-app-region: no-drag;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgb(61, 61, 61);
     transition: 0.75s;
     cursor: pointer
 }
 
 ::-webkit-scrollbar-thumb:hover {
     -webkit-app-region: no-drag;
-    background: rgba(255, 255, 255, 0.5)
-}*/
+    background: rgb(200, 200, 200)
+}
 
 textarea {
     resize: none

@@ -50,7 +50,9 @@ function main() {
 
         let html = "<style>" + parsed[0] + "</style>" + parsed[1];
 
-        writeFile(folder[0] + "/builds/src/index.html", fs.readFileSync(__dirname + "/../resources/base-app.html", "utf-8").replace("{ @@ body @@ }", html + sml.addText() + sml.buildJS(fs.readdirSync(folder[0] + "/project/events/"), folder[0] + "/project/events/")));
+        let app_name = JSON.parse(fs.readFileSync(folder[0] + '/builds/package.json', "utf-8"))["name"];
+
+        writeFile(folder[0] + "/builds/src/index.html", fs.readFileSync(__dirname + "/../resources/base-app.html", "utf-8").replace("{ @@ app name @@ }", app_name).replace("{ @@ body @@ }", html + sml.addText() + sml.buildJS(fs.readdirSync(folder[0] + "/project/events/"), folder[0] + "/project/events/")));
 
     }
 
