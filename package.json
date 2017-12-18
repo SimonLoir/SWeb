@@ -1,25 +1,35 @@
 {
-  "name": "sweb",
-  "version": "1.0.0",
-  "description": "build your website without code",
-  "main": "main.js",
-  "scripts": {
-    "test": "electron ."
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/SimonLoir/SWeb.git"
-  },
-  "author": "Simon Loir",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/SimonLoir/SWeb/issues"
-  },
-  "homepage": "https://github.com/SimonLoir/SWeb#readme",
-  "dependencies": {
-    "electron": "^1.8.1",
-    "electron-packager": "^9.1.0",
-    "node-pty": "^0.7.2",
-    "xterm": "^2.9.2"
-  }
+    "name": "sweb",
+    "version": "1.0.0",
+    "description": "build your website without code",
+    "main": "main.js",
+    "scripts": {
+        "test": "electron .",
+        "dist": "build --windows --ia32 --x64"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/SimonLoir/SWeb.git"
+    },
+    "author": "Simon Loir",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/SimonLoir/SWeb/issues"
+    },
+    "build": {
+        "appId": "simonloir.sweb",
+        "win": {
+            "target": "nsis"
+        }
+    },
+    "homepage": "https://github.com/SimonLoir/SWeb#readme",
+    "dependencies": {
+        "node-pty": "^0.7.2",
+        "xterm": "^2.9.2"
+    },
+    "devDependencies": {
+        "electron": "^1.8.1",
+        "electron-builder": "^19.49.0",
+        "electron-packager": "^9.1.0"
+    }
 }

@@ -10,7 +10,7 @@
 </head>
 <body>
     <script>
-        TMLElement.prototype.attachTo = function (e_class) {
+        HTMLElement.prototype.attachTo = function (e_class) {
             var real_class = "sweb-app-group-" + e_class;
             this.classList.add(real_class);
         }    
@@ -18,7 +18,8 @@
     <div id="app">
           
           { @@ body @@ }
-        <div id="sweb_free_version">Fait avec sweb free version</div>
+        <!--<div id="sweb_free_version">Fait avec sweb free version</div>-->
+        
     </div>
     <style>
         #app{

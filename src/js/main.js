@@ -28,6 +28,7 @@ function main() {
             mkdir(dir + "/project");
             mkdir(dir + "/project/events");
             
+            writeFile(dir + ".scode.json", '{"project_type":"electron","launch_command" : "electron builds/."}');
             writeFile(dir + "/project/events/app.ready.js", '/* When the app is ready */ \ndocument.addEventListener("DOMContentLoaded", function () {\n\t/* Some code here */\n\tconsole.log("app is loaded")\n});');
             writeFile(dir + "/project/index.sml", "\n", "utf8")
             writeFile(dir + "/project/content.sml-content", "{}", "utf8")
