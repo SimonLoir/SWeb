@@ -7,12 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>SWeb</title>
     <link rel="stylesheet" href="../style/style.css">
+    <link rel="stylesheet" href="../../node_modules/xterm/dist/xterm.css" />
     <script src="../js/extjs.js"></script>
     <script src="../js/main.js"></script>
-    <script src="../js/events.js"></script>
-    <script src="../js/editor.js"></script>
-    <script src="../js/view.js"></script>
-    <link rel="stylesheet" href="../../node_modules/xterm/dist/xterm.css" />
     <script src="../../node_modules/xterm/dist/xterm.js"></script>
     <script src="../../node_modules/xterm/dist/addons/fit/fit.js"></script>
     <style>
@@ -83,6 +80,26 @@
             &copy; Copyright 2017 Simon Loir - under MIT license
         </div>
     </div>
+
+    <div class="project_creation_tool">
+        <div class="top-bar">
+            Choisir un type de projet <span class="popup-close">×</span>
+        </div>
+        <div class="content">
+            
+        </div>
+        <div class="bottom-bar">
+            <table>
+                <tr>
+                    <td>Nom de l'application</td><td><input type="text"></td>
+                </tr>
+                <tr>
+                    <td>Dossier du projet</td><td><input type="text"></td>   
+                </tr>
+            </table>
+        </div>
+    </div>
+
     <script>
         function allowDrop(ev) {
             ev.preventDefault();
