@@ -26,35 +26,40 @@
 <body>
     <div class="wrapper">
         <div class="header start">
-            SWeb <span id="version-activation">[unregistered version]</span> - <span id="dir"></span>
+            SWeb
+            <span id="version-activation">[unregistered version]</span> -
+            <span id="dir"></span>
             <span class="cross-quit">×</span>
         </div>
 
         <div class="left-tool-bar">
             <button class="" id="new_layer">+</button>
         </div>
-        <div class="draw-area"  ondrop="drop(event)" ondragover="allowDrop(event)">
+        <div class="draw-area" ondrop="drop(event)" ondragover="allowDrop(event)">
         </div>
         <div class="right-tool-bar">
             <h2>Tools</h2>
-                <button onclick="main.buildToFolder()">Sauvegarder</button>
-                <button onclick="main.run('npm test', main.runError)">Lancer l'app</button>
-                <button onclick="main.run('electron-packager . --all --electron-version=1.8.1 --out=../releases --icon=src/logo.ico --overwrite', main.runError)">Générer une application</button>
-                <button id="install-tools" onclick="main.run('npm remove electron; npm install electron --save;npm install electron-packager -g --save; npm update', main.installError)">(Ré)installer electron.</button><br />
-                <button onclick="tabmanager.newTab(folder[0] + '/project/events/app.ready.js')">App loaded script</button>
-                <button onclick="tabmanager.newTab(folder[0] + '/builds/package.json')">Configuration</button>
-                
-                <h2>Components</h2>
-                <div>
-                    <div draggable="true" ondragstart="drag(event)" class="component">button</div>
-                    <div draggable="true" ondragstart="drag(event)" class="component">span</div>
-                    <div draggable="true" ondragstart="drag(event)" class="component">div</div>
-                    <div draggable="true" ondragstart="drag(event)" class="component">input</div>
-                    <div draggable="true" ondragstart="drag(event)" class="component">canvas</div>
-                    <div draggable="true" ondragstart="drag(event)" class="component">textarea</div>               
-                </div><br />
-                <input type="text" id="filter" style="background:rgba(255,255,255,0.035);width:calc(100% - 10px);border-radius:3px;border:none;padding:5px;color:white;margin-bottom:5px;"><br />
-                <div class="props"></div>
+            <button onclick="main.buildToFolder()">Sauvegarder</button>
+            <button onclick="main.run('npm test', main.runError)">Lancer l'app</button>
+            <button onclick="main.run('electron-packager . --all --electron-version=1.8.1 --out=../releases --icon=src/logo.ico --overwrite', main.runError)">Générer une application</button>
+            <button id="install-tools" onclick="main.run('npm remove electron; npm install electron --save;npm install electron-packager -g --save; npm update', main.installError)">(Ré)installer electron.</button>
+            <br />
+            <button onclick="tabmanager.newTab(folder[0] + '/project/events/app.ready.js')">App loaded script</button>
+            <button onclick="tabmanager.newTab(folder[0] + '/builds/package.json')">Configuration</button>
+
+            <h2>Components</h2>
+            <div>
+                <div draggable="true" ondragstart="drag(event)" class="component">button</div>
+                <div draggable="true" ondragstart="drag(event)" class="component">span</div>
+                <div draggable="true" ondragstart="drag(event)" class="component">div</div>
+                <div draggable="true" ondragstart="drag(event)" class="component">input</div>
+                <div draggable="true" ondragstart="drag(event)" class="component">canvas</div>
+                <div draggable="true" ondragstart="drag(event)" class="component">textarea</div>
+            </div>
+            <br />
+            <input type="text" id="filter" style="background:rgba(255,255,255,0.035);width:calc(100% - 10px);border-radius:3px;border:none;padding:5px;color:white;margin-bottom:5px;">
+            <br />
+            <div class="props"></div>
             <br />
             <br /> Copyright &copy; 2017 Simon Loir
             <br />
@@ -72,7 +77,8 @@
             </div>
             <div class="create">
                 <h2>Créer un projet</h2>
-                Créez un projet dans SWeb. Un projet édité dans SWeb peut être modifié avec un éditeur de code mais un projet modifié peut ne plus être utilisable par SWeb.
+                Créez un projet dans SWeb. Un projet édité dans SWeb peut être modifié avec un éditeur de code mais un projet modifié peut
+                ne plus être utilisable par SWeb.
                 <div class="start-option base" id="create_empty_project">Créer un projet vide</div>
             </div>
         </div>
@@ -83,20 +89,44 @@
 
     <div class="project_creation_tool">
         <div class="top-bar">
-            Choisir un type de projet <span class="popup-close">×</span>
+            Choisir un type de projet
+            <span class="popup-close">×</span>
         </div>
         <div class="content">
-            
+            <div style="padding:25px;padding-bottom:0;">Choisissez un type de projet en cliquant dessus.</div>
+            <div class="app-type">
+                <img src="../resources/electron-logo.png" alt="">
+                <div>
+                    <b>
+                        Projet Electron
+                    </b>
+                </div>
+            </div>
+            <div class="app-type">
+                <img src="../resources/www-logo.png" alt="">
+                <div>
+                    <b>
+                        Site web
+                    </b>
+                </div>
+            </div>
         </div>
         <div class="bottom-bar">
             <table>
                 <tr>
-                    <td>Nom de l'application</td><td><input type="text"></td>
+                    <td>Nom de l'application</td>
+                    <td>
+                        <input type="text" id="app_name" placeholder="Le nom ne peut pas contenir d'espace">
+                    </td>
                 </tr>
                 <tr>
-                    <td>Dossier du projet</td><td><input type="text"></td>   
+                    <td>Dossier du projet</td>
+                    <td>
+                        <input type="text" id="dir_name" placeholder="Le répertoire doit exister">
+                    </td>
                 </tr>
             </table>
+            <button style="position:absolute;bottom:20px;right:20px;" id="build_app">Commencer</button>
         </div>
     </div>
 

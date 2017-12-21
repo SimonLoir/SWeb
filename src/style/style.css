@@ -564,6 +564,7 @@ textarea {
 .top-bar{
     background: rgb(40,40,40);
     padding: 8px;
+    font-weight: 700;
     padding-right: 18px;
 }
 .popup-close{
@@ -585,4 +586,57 @@ textarea {
     border-radius: 4px;
     width: 400px;
     max-width: 90%;
+}
+
+.bottom-bar button{
+    border: 1px solid #272727;
+    background: hsl(0, 0%, 16%);
+    color: white;
+    padding: 15px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border-radius: 4px;
+    max-width: 10%;
+    cursor: pointer;
+}
+
+.content{
+    position: absolute;
+    top: 35px;
+    bottom: 95px;
+    overflow: auto;
+    width: 100%;
+}
+
+.app-type{
+    transition: 0.75s;
+    cursor: pointer;
+    position: relative;
+    width: 300px;
+    height: 400px;
+    background:rgb(50,50,50);
+    margin: 25px;
+    display: inline-block;
+    border-radius: 4px;
+}
+
+.app-type img{
+    width:100%;
+}
+
+.app-type div{
+    position: relative;
+    height: 100px;
+}
+
+.app-type b{
+    position: absolute;
+    display: inline-block;
+    bottom: 50%;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.selected{
+    background:#15a115;
 }
