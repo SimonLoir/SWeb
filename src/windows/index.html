@@ -94,7 +94,7 @@
         </div>
         <div class="content">
             <div style="padding:25px;padding-bottom:0;">Choisissez un type de projet en cliquant dessus.</div>
-            <div class="app-type">
+            <div class="app-type selected" data-type="electron">
                 <img src="../resources/electron-logo.png" alt="">
                 <div>
                     <b>
@@ -102,7 +102,7 @@
                     </b>
                 </div>
             </div>
-            <div class="app-type">
+            <div class="app-type" data-type="web">
                 <img src="../resources/www-logo.png" alt="">
                 <div>
                     <b>
@@ -122,11 +122,11 @@
                 <tr>
                     <td>Dossier du projet</td>
                     <td>
-                        <input type="text" id="dir_name" placeholder="Le répertoire doit exister">
+                        <input type="text" id="dir_name" placeholder="Le répertoire doit exister"> <button id="choose_dir" style="padding-top:5px;padding-bottom:5px;">...</button>
                     </td>
                 </tr>
             </table>
-            <button style="position:absolute;bottom:20px;right:20px;" id="build_app">Commencer</button>
+            <button style="position:absolute;bottom:20px;right:20px;background:#15a115;" id="build_app">Commencer</button>
         </div>
     </div>
 

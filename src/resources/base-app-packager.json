@@ -6,7 +6,7 @@
   "scripts": {
     "test": "electron ."
   },
-  "author": "Simon Loir",
+  "author": "Your name here",
   "license": "MIT",
   "dependencies": {
     "electron": "^1.8.1"
