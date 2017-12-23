@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../../node_modules/xterm/dist/xterm.css" />
     <script src="../js/extjs.js"></script>
     <script src="../js/main.js"></script>
+    <script src="../js/view.js"></script>
     <script src="../../node_modules/xterm/dist/xterm.js"></script>
     <script src="../../node_modules/xterm/dist/addons/fit/fit.js"></script>
     <style>
@@ -70,14 +71,8 @@
             <h2>Explorateur de projet</h2>
             <div class="data-explorer">
                 <span>Fenêtres <i class="icon-down-open"></i>
-                    <div>
-                        <span>Form 1 <i class="icon-down-open"></i></span>
-                        <div>
-                            <span>Obj 1</span>
-                            <span>Obj 2</span>
-                            <span>Obj 3</span>
-                            <span>Obj 4</span>
-                        </div>
+                    <div id="app_windows">
+                        
                     </div>
                 </span>
             </div>
@@ -107,6 +102,7 @@
             <div class="open">
                 <h2>Ouvrir un projet</h2>
                 Ouvrez un projet dans SWeb. Si vous avez modifié le code source généré par SWeb, il se pourrait que SWeb ne puisse pas l'ouvrir.
+                Pour ouvrir le projet, ouvrez le fichier project.sweb se situant à la racine de votre projet. 
                 <div class="start-option base" id="open_from_explorer">Ouvrir depuis l'explorateur de fichiers</div>
             </div>
             <div class="create">
@@ -117,7 +113,7 @@
             </div>
         </div>
         <div style="text-align:center;padding:65px;">
-            &copy; Copyright 2017 Simon Loir - under MIT license
+            &copy; Copyright 2017 Simon Loir - under MIT license - <a href="https://raw.githubusercontent.com/SimonLoir/SWeb/v2/src/resources/font/LICENSE.txt" style="color:coral;">Font Licenses</a>
         </div>
     </div>
 

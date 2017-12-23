@@ -678,4 +678,5 @@ textarea {
     background:white;
     position: absolute;
     top: 15px;right: 15px;left: 15px;bottom: 15px;
+    overflow:auto;
 }

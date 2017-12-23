@@ -10,6 +10,9 @@ const os = require('os');
 const path = require('path');
 
 var sab = require(__dirname + "/../js/sweb-app-builder");
+var sml = require(__dirname + "/../js/sml").init();
+var x_elements = {};
+var elements = {};
 /**
  * Based on scode 2.17.12
  */
@@ -50,17 +53,21 @@ $(document).ready( () => {
             $('#dir_name').get(0).value = f[0];
         });
     });
+    $("#open_from_explorer").click(() => {
+        dialog.showOpenDialog({filters : [
+            {name:"Fichiers SWeb", extensions: ["sweb"]}
+        ], properties: ['openFile'], title:"Choisissez un dossier dans lequel mettre votre projet."}, function (f) {
+            if(f== undefined){
+                return;
+            }
+            sab.loadProject(path.dirname(f[0]));
+            view.hideStartScreen();
+        });
+    });
     //$("#open_from_explorer").click(view.hideStartScreen);
     //$("#open_from_explorer").click()
 });
 
-var view = {
-    hideStartScreen : () => {
-        $('.startscreen').css('display', "none");
-        $('.start').removeClass('start');
-        $('.project_creation_tool').removeClass('visible');        
-    }
-}
 /*
  * Functions from scode 
  * 
@@ -244,7 +251,20 @@ var sweb =  {
         div.css('height', "calc(100% - 30px)")
         div.addClass('app-maker');
 
-
+        //<div class="draw-area"  ondrop="drop(event)" ondragover="allowDrop(event)">
+        div.get(0).setAttribute('data-name', real_file_name)
+        div.get(0).ondrop = drop;
+        div.get(0).ondragover = allowDrop;
+        sweb.open(real_file_name, div.get(0));
+        x_elements[real_file_name] = elements;
+        elements = {};
         return div;
+    }, 
+    save: function (filename, el) {
+        sab.writeFile(directory + "/project/content." + filename + "-content", JSON.stringify(sml.exportContent(el)));
+        sab.writeFile(directory + "/project/" + filename, sml.export(el, true), "utf-8");
+    },
+    open: function (filename, el) {
+        sml.parseAndBuild(fs.readFileSync(directory+ "/project/" + filename, "utf-8"), $(el));
     }
 }
