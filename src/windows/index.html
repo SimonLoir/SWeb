@@ -21,6 +21,7 @@
             background: rgb(34, 34, 34);
         }
     </style>
+    <link rel="stylesheet" href="../resources/font/css/sweb_icons.css">
 </head>
 
 <body>
@@ -31,23 +32,56 @@
             <span id="dir"></span>
             <span class="cross-quit">×</span>
         </div>
+        
+        <div class="x_content">
+            <div class="xheader">
+
+            </div>
+            <div class="tabmanager">
+
+            </div>
+
+        </div>
 
         <div class="left-tool-bar">
-            <button class="" id="new_layer">+</button>
-        </div>
-        <div class="draw-area" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <button>
+                <i class="icon-menu"></i> <span>Menu</span>
+            </button>
+            <button>
+                <i class="icon-install"></i> <span>Installer les outils</span>
+            </button>
+            <button>
+                <i class="icon-cog-alt"></i> <span>Configurer l'app</span>
+            </button>
+            <button>
+                <i class="icon-floppy"></i> <span>Sauvegarder</span>
+            </button>
+            <button>
+                <i class="icon-play"></i> <span>Tester l'app</span>
+            </button>
+            <button>
+                <i class="icon-box"></i> <span>Créer un exécutable</span>
+            </button>
+            <button>
+                <i class="icon-link-ext"></i> <span>Tester le site web</span>
+            </button>
         </div>
         <div class="right-tool-bar">
-            <h2>Tools</h2>
-            <button onclick="main.buildToFolder()">Sauvegarder</button>
-            <button onclick="main.run('npm test', main.runError)">Lancer l'app</button>
-            <button onclick="main.run('electron-packager . --all --electron-version=1.8.1 --out=../releases --icon=src/logo.ico --overwrite', main.runError)">Générer une application</button>
-            <button id="install-tools" onclick="main.run('npm remove electron; npm install electron --save;npm install electron-packager -g --save; npm update', main.installError)">(Ré)installer electron.</button>
-            <br />
-            <button onclick="tabmanager.newTab(folder[0] + '/project/events/app.ready.js')">App loaded script</button>
-            <button onclick="tabmanager.newTab(folder[0] + '/builds/package.json')">Configuration</button>
-
-            <h2>Components</h2>
+            <h2>Explorateur de projet</h2>
+            <div class="data-explorer">
+                <span>Fenêtres <i class="icon-down-open"></i>
+                    <div>
+                        <span>Form 1 <i class="icon-down-open"></i></span>
+                        <div>
+                            <span>Obj 1</span>
+                            <span>Obj 2</span>
+                            <span>Obj 3</span>
+                            <span>Obj 4</span>
+                        </div>
+                    </div>
+                </span>
+            </div>
+            <h2>Objets</h2>
             <div>
                 <div draggable="true" ondragstart="drag(event)" class="component">button</div>
                 <div draggable="true" ondragstart="drag(event)" class="component">span</div>
@@ -122,7 +156,8 @@
                 <tr>
                     <td>Dossier du projet</td>
                     <td>
-                        <input type="text" id="dir_name" placeholder="Le répertoire doit exister"> <button id="choose_dir" style="padding-top:5px;padding-bottom:5px;">...</button>
+                        <input type="text" id="dir_name" placeholder="Le répertoire doit exister">
+                        <button id="choose_dir" style="padding-top:5px;padding-bottom:5px;">...</button>
                     </td>
                 </tr>
             </table>
