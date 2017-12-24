@@ -41,11 +41,11 @@ var view = {
         x_elements[name] = elements;
         sweb.save(name, el);
         addEditorFeatures(e.get(0), false)
-    }, createEditor : function (el) {
+    }, createEditor : function (el, name) {
         
         let id = el.id;
 
-        let file = directory + "/project/events/" + id + ".js";
+        let file = directory + "/project/events/" + name + "." + id + ".js";
         
         if(fs.existsSync(file)){
             
@@ -79,7 +79,9 @@ function addEditorFeatures(e, remove) {
         if (e.toElement != this) {
             return;
         }
-        view.createEditor(this);
+        var parent = this.closest('.app-maker');
+        var parent_name = parent.getAttribute('data-name');
+        view.createEditor(this, parent_name);
     }
 
     e.onclick = function(e) {
@@ -130,6 +132,9 @@ function draggable(el) {
     });
     document.addEventListener("mouseup", function(e) {
         inDrag = false;
+        var parent = dragTarget.closest('.app-maker');
+        var parent_name = parent.getAttribute('data-name');
+        sweb.save(parent_name, parent);
     });
 
 }

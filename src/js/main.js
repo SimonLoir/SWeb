@@ -17,29 +17,28 @@ var elements = {};
 /**
  * Based on scode 2.17.12
  */
-var tabs = {}, id = 0, project_settings, active_document = null, settings, folder, folder_status, language, first_use,terminal_last_id = 0,terms = {};
+var tabs = {}, id = 0, project_settings, active_document = null, settings, folder, folder_status, language, first_use, terminal_last_id = 0, terms = {};
 var tabmanager = require(__dirname + "/../js/tabs");
 var highlighting = require(__dirname + "/../js/highlighting").init();
 var directory = "";
 var folder = [];
 
-$(document).ready( () => {
+$(document).ready(() => {
     $('#create_empty_project').click(() => {
         $('.project_creation_tool').addClass('visible');
     });
     $('.app-type').click(function () {
         $('.app-type').removeClass('selected');
-        $(this).addClass('selected')
-        console.log(this)
+        $(this).addClass('selected');
     });
     $('.popup-close').click(() => {
         $('.project_creation_tool').removeClass('visible');
     });
     $('#build_app').click(() => {
         let done = sab.initProject($('#dir_name').get(0).value, $('#app_name').get(0).value, $('.selected').get(0).getAttribute("data-type"));
-        if(done == true){
+        if (done == true) {
             view.hideStartScreen();
-        }else{
+        } else {
             console.log("aborded")
         }
     });
@@ -48,18 +47,20 @@ $(document).ready( () => {
         window.close();
     });
     $("#choose_dir").click(() => {
-        dialog.showOpenDialog({properties: ['openDirectory'], title:"Choisissez un dossier dans lequel mettre votre projet."}, function (f) {
-            if(f== undefined){
+        dialog.showOpenDialog({ properties: ['openDirectory'], title: "Choisissez un dossier dans lequel mettre votre projet." }, function (f) {
+            if (f == undefined) {
                 return;
             }
             $('#dir_name').get(0).value = f[0];
         });
     });
     $("#open_from_explorer").click(() => {
-        dialog.showOpenDialog({filters : [
-            {name:"Fichiers SWeb", extensions: ["sweb"]}
-        ], properties: ['openFile'], title:"Choisissez un dossier dans lequel mettre votre projet."}, function (f) {
-            if(f== undefined){
+        dialog.showOpenDialog({
+            filters: [
+                { name: "Fichiers SWeb", extensions: ["sweb"] }
+            ], properties: ['openFile'], title: "Choisissez un dossier dans lequel mettre votre projet."
+        }, function (f) {
+            if (f == undefined) {
                 return;
             }
             sab.loadProject(path.dirname(f[0]));
@@ -67,9 +68,9 @@ $(document).ready( () => {
         });
     });
     $("#filter").get(0).oninput = function () {
-        
+
         main.updateProps(global_el[0], global_el[1], this.value)
-        
+
     }
     //$("#open_from_explorer").click(view.hideStartScreen);
     //$("#open_from_explorer").click()
@@ -91,10 +92,10 @@ String.prototype.insertAt = function (index, string) {
     return this.substr(0, index) + string + this.substr(index);
 }
 
-String.prototype.find = function(regex, startpos) {
+String.prototype.find = function (regex, startpos) {
     var indexOf = this.substring(startpos || 0).search(regex);
     var value = regex.exec(this.substring(startpos || 0));
-    
+
     try {
         return [(indexOf >= 0) ? (indexOf + (startpos || 0)) : indexOf, value[0], value[0].length];
     } catch (error) {
@@ -102,7 +103,7 @@ String.prototype.find = function(regex, startpos) {
     }
 }
 
-String.prototype.findStr = function(regex, startpos) {
+String.prototype.findStr = function (regex, startpos) {
     return this.find(new RegExp(regex, "i"), startpos);
 }
 
@@ -166,7 +167,7 @@ function load_projet_setting() {
                 ipcRenderer.send('render-project-reg', project_settings.address);
             }
         } catch (error) {
-            
+
         }
     }
 }
@@ -180,8 +181,8 @@ var editor = {
     }
 }
 
-var sweb =  {
-    manager : function (filename) {
+var sweb = {
+    manager: function (filename) {
         tabs[filename] = {
             "title": filename,
             "id": "tab" + id
@@ -265,18 +266,29 @@ var sweb =  {
         x_elements[real_file_name] = elements;
         elements = {};
         return div;
-    }, 
+    },
     save: function (filename, el) {
         sab.writeFile(directory + "/project/content." + filename + "-content", JSON.stringify(sml.exportContent(el)));
         sab.writeFile(directory + "/project/" + filename, sml.export(el, true), "utf-8");
     },
     open: function (filename, el) {
-        sml.parseAndBuild(fs.readFileSync(directory+ "/project/" + filename, "utf-8"), $(el));
+        sml.parseAndBuild(fs.readFileSync(directory + "/project/" + filename, "utf-8"), $(el));
+        var window_texts = fs.readFileSync(directory + "/project/content." + filename + "-content", "utf-8");
+        window_texts = JSON.parse(window_texts);
+
+        for (i = 0; i < Object.keys(window_texts).length; i++) {
+
+            var key = Object.keys(window_texts)[i];
+            
+            $(el.querySelector("#" + key)).html(window_texts[key]);
+
+        }
+
     }
 }
 
 var main = function () {
-    this.updateProps = function(el, text, filter) {
+    this.updateProps = function (el, text, filter) {
 
         global_el = [el, text];
 
@@ -300,7 +312,7 @@ var main = function () {
             key_input.value = "Texte";
             let input = tr.child("td").child("input").get(0);
             input.value = el.innerText;
-            input.oninput = function() {
+            input.oninput = function () {
                 el.innerText = this.value;
             }
 
@@ -326,10 +338,13 @@ var main = function () {
         }
     }
 
-    this.setUpdater = function(e, k, i) {
+    this.setUpdater = function (e, k, i) {
 
-        i.oninput = function() {
+        i.oninput = function () {
             e.style[k] = i.value;
+            var parent = e.closest('.app-maker');
+            var parent_name = parent.getAttribute('data-name');
+            sweb.save(parent_name, parent);
         }
 
     }
@@ -338,14 +353,14 @@ var main = function () {
         this.run('npm install;pause;exit');
     }
 
-    this.run = function(command) {
+    this.run = function (command) {
         let old = folder[0] + "";
         folder[0] = old + "/builds";
         let x = terminal();
         console.log(x);
         x[0].css("height", "40px")
         x[1].fit();
-        setTimeout(function() {
+        setTimeout(function () {
             x[2].write(command + ";exit\r")
         }, 1000)
         folder[0] = old;
@@ -354,6 +369,6 @@ var main = function () {
     return this;
 }();
 
-function updateTerms(){
+function updateTerms() {
     //do nothing
 }
