@@ -3,12 +3,25 @@
   "version": "1.0.0",
   "description": "My app made with electron",
   "main": "main.js",
-  "scripts": {
-    "test": "electron ."
-  },
   "author": "Your name here",
   "license": "MIT",
-  "dependencies": {
-    "electron": "^1.8.1"
+  "dependencies": {},
+  "devDependencies": {
+    "electron": "^1.8.1",
+    "electron-builder": "^19.49.0",
+    "electron-packager": "^9.1.0"
+  },
+  "scripts": {
+    "test": "electron .",
+    "dist": "build --windows --ia32 --x64"
+  },
+  "build": {
+    "appId": "sweb.app.xname",
+	  "directories": {
+	 	"output": "../releases/"
+	  },
+    "win": {
+      "target": "nsis"
+    }
   }
 }

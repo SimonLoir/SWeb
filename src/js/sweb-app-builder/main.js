@@ -42,12 +42,15 @@ exports.initProject = (dir, appname, type)  => {
         return false;
     }
 
+    this.loadProject(dir);
+
     return true;
 }
 
 exports.loadProject = function (dirname){
     $('#dir').html(dirname);
-    directory = dirname
+    directory = dirname;
+    folder[0] = directory;
     var windows = fs.readdirSync(dirname + '/project');
     for (let i = 0; i < windows.length; i++) {
         const window = windows[i];

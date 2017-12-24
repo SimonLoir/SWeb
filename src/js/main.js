@@ -8,6 +8,7 @@ const app = require('electron').remote;
 const fs = require("fs");
 const os = require('os');
 const path = require('path');
+var terminal = require(__dirname + "/../js/terminal").newTerminal;
 
 var sab = require(__dirname + "/../js/sweb-app-builder");
 var sml = require(__dirname + "/../js/sml").init();
@@ -20,6 +21,7 @@ var tabs = {}, id = 0, project_settings, active_document = null, settings, folde
 var tabmanager = require(__dirname + "/../js/tabs");
 var highlighting = require(__dirname + "/../js/highlighting").init();
 var directory = "";
+var folder = [];
 
 $(document).ready( () => {
     $('#create_empty_project').click(() => {
@@ -64,6 +66,11 @@ $(document).ready( () => {
             view.hideStartScreen();
         });
     });
+    $("#filter").get(0).oninput = function () {
+        
+        main.updateProps(global_el[0], global_el[1], this.value)
+        
+    }
     //$("#open_from_explorer").click(view.hideStartScreen);
     //$("#open_from_explorer").click()
 });
@@ -247,11 +254,10 @@ var sweb =  {
         });
 
         var div = tab.child('div');
-        div.css("width", "calc(100% - 30px)")
-        div.css('height', "calc(100% - 30px)")
+        div.css("width", "calc(100% - 4px)")
+        div.css('height', "calc(100% - 4px)")
         div.addClass('app-maker');
 
-        //<div class="draw-area"  ondrop="drop(event)" ondragover="allowDrop(event)">
         div.get(0).setAttribute('data-name', real_file_name)
         div.get(0).ondrop = drop;
         div.get(0).ondragover = allowDrop;
@@ -267,4 +273,87 @@ var sweb =  {
     open: function (filename, el) {
         sml.parseAndBuild(fs.readFileSync(directory+ "/project/" + filename, "utf-8"), $(el));
     }
+}
+
+var main = function () {
+    this.updateProps = function(el, text, filter) {
+
+        global_el = [el, text];
+
+        var style = Object.keys(el.style)
+        let i;
+
+        $(".props").html('');
+
+        let name = $(".props").child('p').html("<b>Nom : </b>" + el.id)
+
+        let table = $(".props").child("table");
+
+        let head = table.child("tr");
+        head.child("th").html('Propriété');
+        head.child("th").html('Valeur');
+
+        if (text == true) {
+
+            let tr = table.child("tr");
+            let key_input = tr.child("td").child("input").get(0)
+            key_input.value = "Texte";
+            let input = tr.child("td").child("input").get(0);
+            input.value = el.innerText;
+            input.oninput = function() {
+                el.innerText = this.value;
+            }
+
+        } else {
+            console.log(text)
+        }
+
+        for (i = 0; i < style.length; i++) {
+
+            var key = style[i];
+            var value = el.style[key];
+
+            if ((isNaN(key) && filter == undefined) || (isNaN(key) && key.indexOf(filter) >= 0)) {
+                let tr = table.child("tr");
+                let key_input = tr.child("td").child("input").get(0)
+                key_input.value = key;
+                let input = tr.child("td").child("input").get(0);
+                input.value = value;
+                main.setUpdater(el, key, input);
+            }
+
+
+        }
+    }
+
+    this.setUpdater = function(e, k, i) {
+
+        i.oninput = function() {
+            e.style[k] = i.value;
+        }
+
+    }
+
+    this.installTools = function () {
+        this.run('npm install;pause;exit');
+    }
+
+    this.run = function(command) {
+        let old = folder[0] + "";
+        folder[0] = old + "/builds";
+        let x = terminal();
+        console.log(x);
+        x[0].css("height", "40px")
+        x[1].fit();
+        setTimeout(function() {
+            x[2].write(command + ";exit\r")
+        }, 1000)
+        folder[0] = old;
+    }
+
+    return this;
+}();
+
+function updateTerms(){
+    //do nothing
 }

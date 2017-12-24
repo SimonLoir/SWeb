@@ -41,6 +41,35 @@ var view = {
         x_elements[name] = elements;
         sweb.save(name, el);
         addEditorFeatures(e.get(0), false)
+    }, createEditor : function (el) {
+        
+        let id = el.id;
+
+        let file = directory + "/project/events/" + id + ".js";
+        
+        if(fs.existsSync(file)){
+            
+            //open the editor
+            tabmanager.newTab(file);
+            
+            
+        }else{
+            let base_code = "";
+            
+            if(id.indexOf("button") == 0){
+                base_code = id + ".onclick = function (event) {\n\n}";
+            }else if(id.indexOf("input") == 0){
+                base_code = id + ".oninput = function (event) {\n\n}\n";
+                base_code += id + ".onkeypress = function (event) {\n\n}\n";
+                base_code += id + ".onkeyup = function (event) {\n\n}\n";
+                base_code += id + ".onkeydown = function (event) {\n\n}\n";
+            }
+                        
+            sab.writeFile(file, "/* This is the js file of the element that has this id : " + id + ". To be organised, please only use this file for that specific element. (Press ESC to exit the editor)*/\n\n" + base_code)
+            
+            tabmanager.newTab(file);
+        }
+        
     }
 }
 
@@ -50,7 +79,7 @@ function addEditorFeatures(e, remove) {
         if (e.toElement != this) {
             return;
         }
-        main.loadEditor(this);
+        view.createEditor(this);
     }
 
     e.onclick = function(e) {
