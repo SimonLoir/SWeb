@@ -5,7 +5,8 @@
     "main": "main.js",
     "scripts": {
         "test": "electron .",
-        "dist": "build --windows --ia32 --x64"
+        "dist": "build --windows --ia32 --x64",
+        "dist-linux": "build --linux --ia32 --x64"        
     },
     "repository": {
         "type": "git",
