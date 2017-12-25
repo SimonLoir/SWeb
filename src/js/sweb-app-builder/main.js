@@ -30,7 +30,7 @@ exports.initProject = (dir, appname, type)  => {
         this.mkdir(dir + "/project/events");
         
         this.writeFile(dir + ".scode.json", '{"project_type":"electron","launch_command" : "electron builds/."}');
-        this.writeFile(dir + "/project/events/index.ready.js", '/* When index.html is ready */ \ndocument.addEventListener("DOMContentLoaded", function () {\n\t/* Some code here */\n\tconsole.log("app is loaded")\n});');
+        this.writeFile(dir + "/project/events/index.ready.js", '/* When index.html is ready */ \ndocument.addEventListener("DOMContentLoaded", function () {\n\t/* Some code here */\n\t//console.log("app is loaded")\n});');
         this.writeFile(dir + "/project/index.sml", "\n", "utf8");
         this.writeFile(dir + "/project.sweb", JSON.stringify(sweb_config) , "utf8");
         this.writeFile(dir + "/project/content.index.sml-content", "{}", "utf8");

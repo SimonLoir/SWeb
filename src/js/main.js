@@ -39,7 +39,7 @@ $(document).ready(() => {
         if (done == true) {
             view.hideStartScreen();
         } else {
-            console.log("aborded")
+            //console.log("aborded")
         }
     });
     $(".cross-quit").click(() => {
@@ -279,7 +279,7 @@ var sweb = {
         for (i = 0; i < Object.keys(window_texts).length; i++) {
 
             var key = Object.keys(window_texts)[i];
-            
+
             $(el.querySelector("#" + key)).html(window_texts[key]);
 
         }
@@ -317,7 +317,7 @@ var main = function () {
             }
 
         } else {
-            console.log(text)
+            //console.log(text)
         }
 
         for (i = 0; i < style.length; i++) {
@@ -357,7 +357,7 @@ var main = function () {
         let old = folder[0] + "";
         folder[0] = old + "/builds";
         let x = terminal();
-        console.log(x);
+        //console.log(x);
         x[0].css("height", "40px")
         x[1].fit();
         setTimeout(function () {
@@ -368,7 +368,54 @@ var main = function () {
 
     this.buildToFolder = function () {
 
+        this.saveAllOpened();
 
+        var windows = fs.readdirSync(directory + '/project');
+        var dir = fs.readdirSync(directory+ "/project/events/");
+        for (let i = 0; i < windows.length; i++) {
+            let window = windows[i];
+            if (path.extname(window) == '.sml') {
+
+                var window_name = path.basename(window, ".sml");
+
+                console.log(window_name, "passed")
+
+                var filename = directory + "/builds/src/" + window_name + ".html";
+
+                let parsed = sml.parse(fs.readFileSync(directory + '/project/' + window, "utf8"));
+
+                let html = "<style>" + parsed[0] + "</style>" + parsed[1];
+
+                let app_name = JSON.parse(fs.readFileSync(directory + '/builds/package.json', "utf-8"))["name"];
+
+                //console.log(html, app_name);
+
+                //console.log(sml.addText(window_name));
+
+                
+                var x_dir = [];
+
+                for (let i = 0; i < dir.length; i++) {
+                    const dir_element = dir[i];
+                    if(dir_element.indexOf(window) == 0){
+                        x_dir.push(dir_element)
+                    }
+                }
+
+                var content = fs.readFileSync(__dirname + "/../resources/base-app.html", "utf-8")
+                content = content.replace("{ @@ app name @@ }", app_name)
+                content = content.replace("{ @@ body @@ }",
+                    html
+                    + sml.addText(window_name)
+                    + sml.buildJS(x_dir, directory + "/project/events/")
+                );
+
+                console.log("==> " + filename, content)
+
+                sab.writeFile(filename, content);
+
+            }
+        }
 
     }
 
@@ -378,9 +425,9 @@ var main = function () {
             let e = tabs[ktabs[i]];
             let id = e.id;
             let textarea = $('#' + e.id + ' .code-editor');
-            if(textarea.node.length == 1){
+            if (textarea.node.length == 1) {
                 let written = fs.writeFileSync(e.title, textarea.get(0).value, "utf8");
-                console.log(written)
+                //console.log(written)
             }
         }
     }

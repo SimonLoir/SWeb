@@ -89,9 +89,9 @@ function addEditorFeatures(e, remove) {
         if (e.toElement != this) {
             return;
         }
-        console.log(remove)
+        //console.log(remove)
         if (remove != true) {
-            console.log(this.nodeName)
+            //console.log(this.nodeName)
             if (this.nodeName == "BUTTON" || this.nodeName == "SPAN") {
                 var text = true;
             } else {
@@ -131,10 +131,16 @@ function draggable(el) {
         dragTarget.style.top = (objInitTop + e.pageY - dragStartY) + "px";
     });
     document.addEventListener("mouseup", function(e) {
+        if(inDrag == true){
+            try {
+                var parent = dragTarget.closest('.app-maker');
+                var parent_name = parent.getAttribute('data-name');
+                sweb.save(parent_name, parent);
+            } catch (error) {
+            }
+        }
         inDrag = false;
-        var parent = dragTarget.closest('.app-maker');
-        var parent_name = parent.getAttribute('data-name');
-        sweb.save(parent_name, parent);
+        
     });
 
 }

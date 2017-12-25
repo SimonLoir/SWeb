@@ -57,10 +57,10 @@
             <button onclick="main.saveAllOpened()">
                 <i class="icon-floppy"></i> <span>Sauvegarder</span>
             </button>
-            <button>
+            <button onclick="main.run('npm test;pause;exit');">
                 <i class="icon-play"></i> <span>Tester l'app</span>
             </button>
-            <button>
+            <button onclick="main.run('npm run dist;pause;exit');">
                 <i class="icon-box"></i> <span>Créer un exécutable</span>
             </button>
             <button>
@@ -173,7 +173,7 @@
         function drop(ev) {
             ev.preventDefault();
             var data = ev.dataTransfer.getData("text");
-            console.log(ev)
+            //console.log(ev)
             view.createElement(data, ev.layerX, ev.layerY, ev.toElement);
         }
     </script>

@@ -21,7 +21,7 @@ exports.init = function() {
 
         this.buildHTML(html_lines, parent);
 
-        //console.log("e")
+        ////console.log("e")
 
         let el = null;
 
@@ -33,7 +33,7 @@ exports.init = function() {
 
 
                 el = parent.get(0).querySelector("#" + this.getId(line))
-                //console.log(el, this.getId(line))
+                ////console.log(el, this.getId(line))
 
 
             } else if (line.indexOf("=") > 0) {
@@ -50,13 +50,13 @@ exports.init = function() {
     }
 
     this.getId = function(line) {
-        //console.log(line)
+        ////console.log(line)
         line = line.replace("def ", "");
-        //console.log(line)
+        ////console.log(line)
         line = line.split(" ")[0];
-        //console.log(line)
+        ////console.log(line)
         line = line.split(">")[line.split(">").length - 1].trim();
-        //console.log("l:" + line)
+        ////console.log("l:" + line)
         return line;
     }
 
@@ -139,7 +139,7 @@ exports.init = function() {
 
             }
 
-            //console.log(e)
+            ////console.log(e)
 
             if (elements[line[1]] == undefined) {
                 elements[line[1]] = 0;
@@ -162,9 +162,9 @@ exports.init = function() {
 
     }
 
-    this.addText = function() {
+    this.addText = function(window_name) {
         let html = "<script>var project_text = ";
-        html += fs.readFileSync(folder[0] + "/project/content.sml-content", "utf-8") + ";";
+        html += fs.readFileSync(folder[0] + "/project/content." + window_name + ".sml-content", "utf-8") + ";";
         html += "let i;"
         html += "for (i = 0; i < Object.keys(project_text).length; i++) {"
 
@@ -196,7 +196,7 @@ exports.init = function() {
 
         real_path = real_path.trim();
 
-        //console.log("path : " + real_path)
+        ////console.log("path : " + real_path)
 
         return real_path;
 
