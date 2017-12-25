@@ -355,7 +355,7 @@ var main = function () {
     }
 
     this.installTools = function () {
-        this.run('npm install;pause;exit', false);
+        this.run('npm install;npm update --save;pause;exit', false);
     }
 
     this.run = function (command, generate) {
