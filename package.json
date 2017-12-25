@@ -6,7 +6,7 @@
     "scripts": {
         "test": "electron .",
         "dist": "build --windows --ia32 --x64",
-        "dist-linux": "build --linux --ia32 --x64"        
+        "dist-linux": "build --linux --ia32 --x64"
     },
     "repository": {
         "type": "git",
@@ -31,7 +31,7 @@
     },
     "devDependencies": {
         "electron": "^1.8.1",
-        "electron-builder": "^19.49.0",
+        "electron-builder": "^19.49.3",
         "electron-packager": "^9.1.0"
     }
 }
