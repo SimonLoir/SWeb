@@ -72,6 +72,11 @@ $(document).ready(() => {
         main.updateProps(global_el[0], global_el[1], this.value)
 
     }
+    document.body.onkeydown = function (event){
+        if(event.key.toLowerCase() == "s" && event.ctrlKey){
+            main.saveAllOpened();
+        }
+    }
     //$("#open_from_explorer").click(view.hideStartScreen);
     //$("#open_from_explorer").click()
 });
@@ -361,10 +366,12 @@ var main = function () {
         folder[0] = old + "/builds";
         let x = terminal();
         //console.log(x);
-        x[0].css("height", "40px")
+        x[0].css("height", "100%");
+        x[0].css('bottom', "0");
+
         x[1].fit();
         setTimeout(function () {
-            x[2].write(command + ";exit\r")
+            x[2].write(command + "\r")
         }, 1000)
         folder[0] = old;
     }
