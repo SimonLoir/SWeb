@@ -366,6 +366,25 @@ var main = function () {
         folder[0] = old;
     }
 
+    this.buildToFolder = function () {
+
+
+
+    }
+
+    this.saveAllOpened = function () {
+        var ktabs = Object.keys(tabs);
+        for (let i = 0; i < ktabs.length; i++) {
+            let e = tabs[ktabs[i]];
+            let id = e.id;
+            let textarea = $('#' + e.id + ' .code-editor');
+            if(textarea.node.length == 1){
+                let written = fs.writeFileSync(e.title, textarea.get(0).value, "utf8");
+                console.log(written)
+            }
+        }
+    }
+
     return this;
 }();
 
