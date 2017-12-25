@@ -350,10 +350,13 @@ var main = function () {
     }
 
     this.installTools = function () {
-        this.run('npm install;pause;exit');
+        this.run('npm install;pause;exit', false);
     }
 
-    this.run = function (command) {
+    this.run = function (command, generate) {
+        if(generate != false){
+            this.buildToFolder();
+        }
         let old = folder[0] + "";
         folder[0] = old + "/builds";
         let x = terminal();
