@@ -76,7 +76,12 @@
                     </div>
                 </span>
             </div>
-            <h2>Objets</h2>
+            
+            <br />
+            <input type="text" id="filter" style="background:rgba(255,255,255,0.035);width:calc(100% - 10px);border-radius:3px;border:none;padding:5px;color:white;margin-bottom:5px;">
+            <br />
+            <div class="props"></div>
+            <br /><h2>Objets</h2>
             <div>
                 <div draggable="true" ondragstart="drag(event)" class="component">button</div>
                 <div draggable="true" ondragstart="drag(event)" class="component">span</div>
@@ -84,12 +89,9 @@
                 <div draggable="true" ondragstart="drag(event)" class="component">input</div>
                 <div draggable="true" ondragstart="drag(event)" class="component">canvas</div>
                 <div draggable="true" ondragstart="drag(event)" class="component">textarea</div>
+                <div draggable="true" ondragstart="drag(event)" class="component" style="width:calc(100% - 14px);">button / win10light</div>
+                <div draggable="true" ondragstart="drag(event)" class="component" style="width:calc(100% - 14px);">button / win10dark</div>
             </div>
-            <br />
-            <input type="text" id="filter" style="background:rgba(255,255,255,0.035);width:calc(100% - 10px);border-radius:3px;border:none;padding:5px;color:white;margin-bottom:5px;">
-            <br />
-            <div class="props"></div>
-            <br />
             <br /> Copyright &copy; 2017 Simon Loir
             <br />
             <br />
@@ -167,7 +169,7 @@
         }
 
         function drag(ev) {
-            ev.dataTransfer.setData("text", ev.target.innerHTML);
+            ev.dataTransfer.setData("text", ev.target.innerText);
         }
 
         function drop(ev) {

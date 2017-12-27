@@ -1,0 +1,17 @@
+button[class^="win10-"], button[class*=" win10-"]{
+    font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif;
+    border:none;
+    padding: 22px;
+    padding-top: 10px;padding-bottom: 10px;
+    font-size: 13px;
+    cursor:pointer;
+}
+button.win10-light{
+    background: rgb(205,205,205);
+    color:black;
+}
+
+button.win10-dark{
+    background: rgb(50,50,50);
+    color:white;
+}

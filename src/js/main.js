@@ -437,7 +437,6 @@ var main = function () {
             let textarea = $('#' + e.id + ' .code-editor');
             if (textarea.node.length == 1) {
                 let written = fs.writeFileSync(e.title, textarea.get(0).value, "utf8");
-                //console.log(written)
             }
         }
     }

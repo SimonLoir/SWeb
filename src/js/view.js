@@ -1,3 +1,31 @@
+var style_palette = {
+    win10light : {
+        button : [
+            ["font-family", "Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif"],
+            ["border","none"],
+            ["padding", "22px"],
+            ["padding-top", "10px"],
+            ["padding-bottom", "10px"],
+            ["font-size", "13px"],
+            ["cursor","pointer"],
+            ["background", "rgb(205,205,205)"],
+            ["color","black"]
+        ]
+    },
+    win10dark : {
+        button : [
+            ["font-family", "Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif"],
+            ["border","none"],
+            ["padding", "22px"],
+            ["padding-top", "10px"],
+            ["padding-bottom", "10px"],
+            ["font-size", "13px"],
+            ["cursor","pointer"],
+            ["background", "rgb(50,50,50)"],
+            ["color","white"]
+        ]
+    }
+};
 
 var view = {
     hideStartScreen : () => {
@@ -6,15 +34,31 @@ var view = {
         $('.project_creation_tool').removeClass('visible');        
     },
     createElement:function(data, x, y, el) {
+
+        let split = data.split('/');
+
+        data = split[0].trim();
+
+        
         var e = $(el).child(data);
         e.css("position", "absolute");
         e.css("top", y + "px");
         e.css("left", x + "px");
+
         if (data == "div") {
             e.css("width", "200px");
             e.css("height", "200px");
             e.addClass("always-visible")
             e.get(0).ondragover = allowDrop;
+        }
+
+        if(split[1] != undefined){
+            let style = style_palette[split[1].trim()][data];
+            console.log(style)
+            for (let i = 0; i < style.length; i++) {
+                const element = style[i];
+                e.css(element[0], element[1]);
+            }
         }
 
         var name = el.getAttribute('data-name');
