@@ -8,19 +8,20 @@ exports.mkdir = (dirname) => {
     }
 }
 
-exports.initProject = (dir, appname, type)  => {
+exports.initProject = (dir, appname, type) => {
     let fs = require("fs");
-    if(fs.existsSync(dir) == false){
+    if (fs.existsSync(dir) == false) {
         alert("Ce répertoire n'existe pas.");
         return false;
     }
-    if(fs.readdirSync(dir).length != 0){
+    if (fs.readdirSync(dir).length != 0) {
         alert("Le dossier de destination doit être vide");
         return false;
     }
     let sweb_config = {
         appname: appname,
-        type:type
+        type: type,
+        version: version
     };
     try {
         this.mkdir(dir + "/releases");
@@ -28,15 +29,16 @@ exports.initProject = (dir, appname, type)  => {
         this.mkdir(dir + "/builds/src");
         this.mkdir(dir + "/project");
         this.mkdir(dir + "/project/events");
-        
+
         this.writeFile(dir + ".scode.json", '{"project_type":"electron","launch_command" : "electron builds/."}');
         this.writeFile(dir + "/project/events/index.ready.js", '/* When index.html is ready */ \ndocument.addEventListener("DOMContentLoaded", function () {\n\t/* Some code here */\n\t//console.log("app is loaded")\n});');
         this.writeFile(dir + "/project/index.sml", "\n", "utf8");
-        this.writeFile(dir + "/project.sweb", JSON.stringify(sweb_config) , "utf8");
+        this.writeFile(dir + "/project.sweb", JSON.stringify(sweb_config), "utf8");
         this.writeFile(dir + "/project/content.index.sml-content", "{}", "utf8");
         this.writeFile(dir + "/builds/main.js", fs.readFileSync(__dirname + "/../../resources/base-app.js", "utf-8"));
         this.writeFile(dir + "/builds/package.json", fs.readFileSync(__dirname + "/../../resources/base-app-packager.json", "utf-8").replace("app-name", appname));
         this.writeFile(dir + "/builds/src/index.html", fs.readFileSync(__dirname + "/../../resources/base-app.html", "utf-8"));
+        this.writeFile(dir + "/builds/src/sweb-base.js", fs.readFileSync(__dirname + "/../../resources/sweb-base.js", "utf-8"));
     } catch (e) {
         alert("Erreur lors de la création des dossiers : \n" + e);
         return false;
@@ -47,14 +49,27 @@ exports.initProject = (dir, appname, type)  => {
     return true;
 }
 
-exports.loadProject = function (dirname){
+exports.loadProject = function (dirname) {
     $('#dir').html(dirname);
     directory = dirname;
     folder[0] = directory;
+
+    try {
+        var config = JSON.parse(fs.readFileSync(dirname + "/project.sweb"));
+
+        if (JSON.stringify(config.version.library) != JSON.stringify(version.library)) {
+            alert("Votre projet n'est peut-être pas compatible avec la dernière version de sweb :-(");
+        } else {
+            console.log("version is ok")
+        }
+    } catch (error) {
+        console.log(error + " might be because the project has been build with an other version of sweb");
+    }
+
     var windows = fs.readdirSync(dirname + '/project');
     for (let i = 0; i < windows.length; i++) {
         const window = windows[i];
-        if(path.extname(window) == '.sml'){
+        if (path.extname(window) == '.sml') {
             this.addToList(window, dirname);
         }
     }

@@ -22,6 +22,20 @@ var tabmanager = require(__dirname + "/../js/tabs");
 var highlighting = require(__dirname + "/../js/highlighting").init();
 var directory = "";
 var folder = [];
+var version = {
+    app: {
+        base: 2,
+        major: 17,
+        minor: 12,
+        build: 25
+    },
+    library: {
+        base: 0,
+        major: 17,
+        minor: 12,
+        build: 25
+    }
+}
 
 $(document).ready(() => {
     $('#create_empty_project').click(() => {
